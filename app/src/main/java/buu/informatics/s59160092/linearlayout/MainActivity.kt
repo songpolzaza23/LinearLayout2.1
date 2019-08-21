@@ -14,13 +14,16 @@ import buu.informatics.s59160092.linearlayout.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val myName:MyName = MyName("Songpol")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.apply {
             doneButton.setOnClickListener { addNickName(it) }
             nicknameText.setOnClickListener { updateNickname(it) }
+            this.myName = this@MainActivity.myName
         }
+
 
     }
 
@@ -42,9 +45,10 @@ class MainActivity : AppCompatActivity() {
     private fun addNickName(view: View) {
 // Add code to perform the button click event
         binding.apply {
-            nicknameText.text = binding.nicknameEdit.text
+            myName?.nickname = nicknameEdit.text.toString()
             nicknameEdit.visibility = View.GONE
             nicknameText.visibility = View.VISIBLE
+            invalidateAll()
 
             doneButton.visibility = View.GONE
 
